@@ -1,217 +1,147 @@
-# 🚗 Persian License Plate Recognition System (PLPR)
+# Persian License Plate Recognition Study Project
 
-The Persian License Plate Recognition (PLPR) system is a state-of-the-art solution designed for detecting and recognizing Persian license plates in images and video streams. Leveraging advanced deep learning models and a user-friendly interface, it ensures reliable performance across different scenarios.
+This repository is an archived study and integration project for detecting Persian vehicle plates, recognizing plate characters, displaying results in a desktop interface, and connecting recognized plates to simple resident or entrance records.
 
-## 🔍 Overview
+It assembles and adapts open-source computer-vision components, datasets, and examples. It is not presented as a production access-control product, and the repository does not currently include a maintained benchmark proving accuracy, latency, or real-time performance across deployment conditions.
 
-This system aims to tackle the unique challenges associated with Persian license plate detection and recognition, offering high accuracy and efficiency. It's well-suited for applications in traffic monitoring, automated vehicle identification, and similar fields.
+## Status
 
-## ✨ Key Features
+- archived educational and research project;
+- no active feature roadmap;
+- no guaranteed support for current library, operating-system, camera, or GPU versions;
+- not suitable for security-sensitive access decisions without independent testing and additional controls.
 
-- **Advanced Detection**: Utilizes YOLOv5 models for high-accuracy license plate detection.
-- **Persian Character Recognition**: Custom-trained models ensure precise recognition of Persian characters.
-- **Real-Time Processing**: Capable of processing live video feeds in real-time.
-- **User-Friendly GUI**: Intuitive graphical user interface simplifies interactions with the system.
----
-<table>
-<tr>
-<td valign="top" width="50%">
+## Included Workflow
 
+The codebase demonstrates a workflow similar to:
 
-   <img src="/repo_images/parts.jpg" alt="explain main gui" style="max-width:300px;">
+```text
+Image or video input
+    -> plate detection
+    -> plate crop
+    -> Persian character recognition
+    -> local record lookup
+    -> GUI display and event logging
+```
 
+Depending on the configured files and environment, the application may include:
 
-</td>
-<td valign="top" width="50%">
+- YOLOv5-based plate detection;
+- a character-recognition model;
+- image, video, webcam, or stream input;
+- a PySide6 desktop interface;
+- OpenCV-based image processing;
+- local resident, permission, or entrance records.
 
-   ## Main GUI Explanation
+These items describe the intended code paths, not measured production guarantees.
 
-- **1 Input View**: Shows video or camera feed.
-- **2 Detected Plate Highlight**: Draws rectangle around detected plates.
-- **3 Plate Image Display**: Shows captured image of the detected plate.
-- **4 Extracted Text**: Displays text recognized from the plate image.
-- **5 Owner Name**: Lists the registered owner's name.
-- **6 Plate Status**: Indicates if the plate is allowed, not allowed, or non-registered.
-- **7 Recent Entries Table**: Shows last 10 entries with options to add non-registered plates or view owner info.
+## Screenshots
 
+### Main Interface
 
-</td>
-</tr>
-</table>
+<img src="repo_images/parts.jpg" alt="Main interface with input, detected plate, recognized text, and recent entries" style="max-width:800px;">
 
+### Resident Management
 
-<table>
-<tr>
-<td valign="top" width="50%">
+<img src="repo_images/people.jpg" alt="Resident management interface" style="max-width:800px;">
 
-   ## Resident Management
+### Entrance Management
 
-   <img src="/repo_images/people.jpg" alt="explain main resident management" style="max-width:300px;">
+<img src="repo_images/ent.png" alt="Entrance management interface" style="max-width:800px;">
 
-Focuses on maintaining and updating resident vehicle information, managing permissions for entry, and tracking resident vehicle movements within the premises.
+### Processing Flow
 
-</td>
-<td valign="top" width="50%">
+<img src="repo_images/detection_steps.png" alt="Plate detection and recognition flow" style="max-width:800px;">
 
-   ## Entrance Management
+## Installation
 
-   <img src="/repo_images/ent.png" alt="explain main entrance management" style="max-width:300px;">
+Clone this repository:
 
-Handles the regulation of vehicles entering and exiting the premises, ensuring only authorized vehicles gain access, and maintaining a log of all vehicle movements for security and administrative purposes.
+```bash
+git clone https://github.com/mahdiaghtaee/persian-license-plate-recognition.git
+cd persian-license-plate-recognition
+```
 
-</td>
-</tr>
-</table>
+Create an isolated Python environment and install the pinned or documented dependencies available in the repository:
 
+```bash
+python -m venv .venv
+```
 
----
-<table>
-<tr>
-<td valign="top" width="50%">
+Activate the environment using the command appropriate for your operating system, then install dependencies:
 
-<img src="repo_images/detection_steps.png" alt="explain main flowchart" style="max-width:300px;">
+```bash
+pip install -r requirements.txt
+```
 
-</td>
-<td valign="top" width="50%">
+Because this repository is archived, dependency versions may require adjustment for a modern environment. Review model-file locations and configuration before running the application.
 
-   ## Main Flowchart Explanation
+## Input Configuration
 
-- **Start**: System initialization.
-- **Input Feed**: Receives image/video stream.
-- **Detect Plate**: YOLOv5 identifies license plates.
-- **Character Recognition**: Custom model recognizes Persian characters.
-- **Database Check**: Compares plate with database for status and owner.
-- **Display Results**: Shows detection and recognition results in GUI.
-- **Log Entry**: Updates recent entries table and database.
-- **End/Repeat**: Continues with new input or concludes operation.
+The application reads its image, video, camera, or stream source from the relevant OpenCV call and configuration values used by the codebase.
 
-</td>
-</tr>
-<tr>
-<td colspan="2" valign="top">
+Examples may include:
 
-**[Read the detailed flow in wiki](https://github.com/mtkarimi/smart-resident-guard/wiki/Main-Flow)**
+```python
+cv2.VideoCapture(0)
+```
 
-</td>
-</tr>
-</table>
+for the default camera, or a configured file or RTSP address.
 
-### 💻 System Hardware Requirements
+Do not place credentials for private cameras or production streams in committed configuration files.
 
-To ensure optimal performance of the Persian License Plate Recognition System (PLPR), the following hardware specifications are recommended:
+## Run
 
-- **Processor**: Intel Core i5 (8th Gen) or equivalent/higher.
-- **Memory**: 8 GB RAM or more.
-- **Graphics**: Dedicated GPU (NVIDIA GTX 1060 or equivalent) with at least 4 GB VRAM for efficient real-time processing and deep learning model computations.
-- **Storage**: SSD with at least 20 GB of free space for software, models, and datasets.
-- **Operating System**: Compatible with Windows 10/11, Linux (Ubuntu 18.04 or later), and macOS (10.14 Mojave or later).
+The historical entry point is:
 
-These specifications are designed to handle the computational demands of advanced deep learning models, real-time video processing, and high-volume data management integral to the PLPR system. Adjustments may be necessary based on specific deployment scenarios and performance expectations.
-
-## 🚀 Getting Started
-
-### 🔧 Installation
-
-1. Clone the repository and navigate to its directory:
-   ```bash
-   git clone https://github.com/mtkarimi/smart-resident-guard.git
-   cd smart-resident-guard
-   ```
-2. Install the required Python packages:
-   ```bash
-   pip install -r requirements.txt
-   ```
-
-
-### 🔄 Video Source Configuration
-
-
-<img src="repo_images/change_source.png" alt="where to change the source" style="max-width:300px;">
-
-To customize the video source for processing, modify the parameter in `cv2.VideoCapture(0)`, where `0` denotes the default webcam input. For using a specific video file, change this parameter to `params.video`, which fetches the video path from `config.ini`. In `config.ini`, set the `video` parameter to your video file path, e.g., `video = anpr_video.mp4`, replacing `anpr_video.mp4` with the path to your video file.
-
-For streaming video sources, update the `config.ini` file with the stream address. Replace the existing video path with your stream address, for example, `rtps = rtsp://172.17.0.1:8554/webCamStream`. This adjustment allows the system to process video streams in real-time.
-
-This flexibility in video source selection enables seamless integration and testing across various input methods, ensuring adaptability to different operational requirements.
-
-### ▶️ Running the Application
-
-Launch the application with the following command:
 ```bash
 python home-yolo.py
 ```
 
-## 🛠️ Usage
+Confirm the actual entry point, model paths, database settings, and required assets in your checkout before running it.
 
-The system's GUI enables users to upload and process images or video streams, displaying detected license plates and recognized text. It also allows for parameter adjustments to optimize performance.
+## Limitations
 
-## 📖 Learn More in the Wiki
+- No maintained evaluation report is included for detection accuracy, character-recognition accuracy, false positives, false negatives, or end-to-end latency.
+- Performance depends on hardware, input resolution, camera angle, lighting, motion blur, plate condition, and model files.
+- The repository may contain large model or research assets and is not optimized as a distributable application package.
+- Authorization decisions should not rely solely on computer-vision output.
+- Production deployments require authentication, audit logging, encrypted configuration, secure database access, monitoring, privacy review, retention controls, and a manual fallback process.
 
-For a deep dive into the PLPR system's architecture, model training, and advanced usage, check out our [Wiki](https://github.com/mtkarimi/smart-resident-guard/wiki). It's a comprehensive resource for users and developers alike.
+## Open-source Components and Data
 
-## 📚 Additional Academic Resources
+The project was informed by and built with open-source tools and community resources, including:
 
-Explore the `pdf-research` directory for research papers and articles on LPR technologies, offering insights into the techniques and algorithms behind the system.
+- [YOLOv5](https://github.com/ultralytics/yolov5)
+- [PyTorch](https://github.com/pytorch/pytorch)
+- [PySide6](https://github.com/pyside/pyside-setup)
+- [OpenCV](https://github.com/opencv/opencv)
+- [Pillow](https://github.com/python-pillow/Pillow)
 
-## 💙 Special Thanks
+Datasets and related research resources referenced during the project include:
 
-Heartfelt thanks to the open-source projects and communities that have made this project possible. Special mentions include:
+- [IR-LPR](https://github.com/mut-deep/IR-LPR)
+- [Iranis dataset](https://github.com/alitourani/Iranis-dataset)
+- [ILPR](https://github.com/amirmgh1375/iranian-license-plate-recognition)
 
-- **YOLOv5** and **PyTorch** for the core detection and recognition models.
-- **PySide6** and **OpenCV** for the application interface and image processing capabilities.
-- **Pillow** for enhanced image manipulation.
+Additional community repositories and examples may have influenced the integration approach. Review source headers, dependency licenses, dataset terms, and the repository history before redistributing models, data, or derived artifacts.
 
-## 📦 Repositories Used
+## Reproducibility
 
-- YOLOv5: [GitHub](https://github.com/ultralytics/yolov5)
-- PyTorch: [GitHub](https://github.com/pytorch/pytorch)
-- PySide6: [GitHub](https://github.com/PySide/PySide6)
-- OpenCV: [GitHub](https://github.com/opencv/opencv)
-- Pillow: [GitHub](https://github.com/python-pillow/Pillow)
+A future reproducibility update would need to add:
 
-## 🙏 Acknowledgments
+- exact Python and dependency versions;
+- model checksums and documented model provenance;
+- a small permitted evaluation dataset;
+- detection and recognition metrics;
+- hardware and latency measurements;
+- automated tests for preprocessing, plate formatting, and database behavior;
+- a clean command-line or container-based run path.
 
-This project stands on the shoulders of giants within the AI and open-source communities. Their dedication to sharing knowledge and tools has been invaluable.
+Until those items exist, treat the repository as a historical study artifact rather than a verified benchmark.
 
-## 📄 License
+## License
 
-GPL-3.0. See the [LICENSE](LICENSE) file for details. It means you can:
-- Share Source Code: If you distribute binaries or modified versions, you must make the source code available under GPL-3.
-- License: Must keep and apply GPL-3 to the modified work.
-- State Modifications: If modified, must disclose that it was changed.
-  
----
+This repository is distributed under the GPL-3.0 license. See [LICENSE](LICENSE).
 
-### 📝 Clarification on Contributions and Usage
-
-The Persian License Plate Recognition (PLPR) system is a testament to the collaborative spirit of the open-source community. While the assembly and development of this system were carried out independently, the project is enriched through the insights and resources offered by various exceptional contributors and datasets within the community. This section is dedicated to acknowledging those invaluable learnings and resources.
-
-🫂 **Learning from Community Leaders**: 
-- Immense gratitude is directed towards [Mahdi Rahmani](https://github.com/MahdiRahmani) and [Meftun AKARSU](https://github.com/mftnakrsu). Although not directly involved in this project, their repositories served as significant learning resources. The knowledge gleaned from their work helped in navigating the complexities of license plate recognition and contributed to the foundation upon which PLPR was built.
-
-🧱 **Acknowledging Vital Datasets**:
-- The datasets that played a pivotal role in the development of the PLPR system deserve special mention. I am deeply thankful for access to:
-  - [IR-LPR](https://github.com/mut-deep/IR-LPR)
-  - [Iranis-dataset](https://github.com/alitourani/Iranis-dataset)
-  - [ILPR](https://github.com/amirmgh1375/iranian-license-plate-recognition)
-  
-  These resources were crucial for training and refining the recognition capabilities of the system. My heartfelt thanks go out to the creators and contributors of these datasets for their openness and dedication to advancing the field.
-
-**Open for Dialogue**:
-- Acting in the spirit of the open-source community means valuing transparency and open communication. Should there be any questions about how I utilized these contributions, or if there are specific concerns to be addressed, I am more than willing to engage in discussions. This project is a reflection of what can be accomplished through shared knowledge and cooperation, and I am committed to learning from and contributing back to the community.
-
-I extend my sincerest appreciation to everyone whose work has indirectly contributed to the Persian License Plate Recognition system. Your tireless efforts and willingness to share knowledge have not only made this project possible but also continue to inspire and propel the open-source movement forward.
-
----
-🌟 **A Heartfelt Note**:
-
-- 🍁 **Continuing Forward**: This repository has reached a milestone and I've decided to not update it going forward. It stands as a testament to what we've achieved together.
-- 📚 **Inspiration and Acknowledgment**: Much of what you've read and discovered here, including the detailed Wiki, was crafted with the assistance of ChatGPT. This AI has been an invaluable tool in articulating ideas and descriptions.
-- 🌈 **Gratitude and Learning**: I encourage you to explore the works of the contributors and datasets mentioned here. Their efforts not only enriched this project but also provide vast oceans of knowledge and inspiration for us all.
-- 🧩 **The Journey**: If there's one thing I've learned, it's that creativity is about connecting ideas. My role was more of an assembler, piecing together the incredible innovations and knowledge shared by the community to create something meaningful.
-
-💖 **Thank you all for your support, curiosity, and for joining me on this journey. Here's to the endless potential of collaboration and open source! 🥂**
-
-
-
-
+The licenses and terms of third-party code, model weights, datasets, and research assets continue to apply independently. GPL licensing of this repository does not replace those upstream obligations.
